@@ -173,7 +173,7 @@ for convenience.
   - PHP
   - Rust
   - C/C++
-  - TypeScript/JavaScript
+  - TypeScript/JavaScript (likely superseding [farmOS.js])
   - Python
   - Ruby
   - Elixir
@@ -195,6 +195,7 @@ for convenience.
 [IDL]: https://en.wikipedia.org/wiki/Interface_description_language
 [IPLD]: https://ipld.io/
 [Atomic Data]: https://docs.atomicdata.dev/core/json-ad
+[farmOS.js]: https://farmos.org/development/farmos-js/
 [Phoenix]: https://www.phoenixframework.org/
 [LiveView]: https://hexdocs.pm/phoenix_live_view
 [Turso/libsql]: https://turso.tech/multi-tenancy
@@ -224,25 +225,29 @@ or integrated into a microservice architecture.
 This will be a fairly lightweight client application, practically just a daemon
 running from the system tray on desktop or as a background notifier on mobile,
 but it will also serve as the host or kernel for the client plugin applications
-that can be installed from the [Plugin Store] and will act as the [app shell]
-for the plugins' UI. In this respect, it will be quite similar to farmOS Field
-Kit's corresponding field modules and app shell, perhaps even recycling some
-of Field Kit's code where it hasn't been superseded by the [Common Engine] or
-the [Plugin Store]. Depending on the platform target (eg, desktop, mobile, IoT,
-etc.), the client may come stocked with a "Data Viewer" or "Tasks List" plugin
-by default, similar to how Field Kit was planned to come with the "Tasks" Field
-Module, so users have at least some kind of minimal interface for interacting
-with data, without requiring any additional [Runrig Server] plugins or Standard
-farmOS modules as dependencies, at least not beyond the [Common Engine] and
-Standard farmOS's core modules, respectively.
+that can be installed from the [Plugin Store]. In this respect, it will
+supersede much of farmOS Field Kit's [intended functionality], like the proposed
+[Field Module] system, [app shell], and the Vue composable [`useEntities`] for
+CRUD & syncing operations. Much of this functionality will be replaced by the
+[Common Engine] and [Plugin Store], but wherever feasible, we'll try to recycle
+any relevant portions of Field Kit's codebase. Depending on the platform target
+(eg, desktop, mobile, IoT, etc.), the client may come stocked with a "Data
+Viewer" or "Tasks List" plugin by default, similar to how Field Kit was planned
+to come with the "Tasks" Field Module, so users have at least some kind of
+minimal interface for interacting with data, without requiring any additional
+[Runrig Server] plugins or Standard farmOS modules as dependencies, at least not
+beyond the [Common Engine] and Standard farmOS's core modules, respectively.
 
 #### Requirements
-- Wraps the [Common Engine]
+- Integrates the [Common Engine]
 - [Runrig Server] Connection
 - farmOS JSON:API Connection
 - Connection to [Plugin Store]
 
+[intended functionality]: https://github.com/farmOS/field-kit/blob/develop/docs/index.md
+[Field Module]: https://github.com/farmOS/field-kit/blob/develop/packages/create-field-module/README.md
 [app shell]: https://developer.chrome.com/blog/app-shell/
+[`useEntities`]: https://github.com/farmOS/field-kit/blob/e72ce401ae6aa987d7c28f67dce3a64ee9020931/packages/field-kit/src/entities/index.js#L144-L497
 
 ### Plugin Store
 For examples, see the [Nextcloud App Store](https://apps.nextcloud.com/) or
