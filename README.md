@@ -201,17 +201,24 @@ for convenience.
 
 ## Application Packages
 ### Server
-A fully headless server that mostly provides remote storage and a syncing node
-for local-first applications, federated servers, and standard farmOS instances
-that have the [`farm_runrig` module](#farmos-module-farm_runrig) installed.
+A fully headless, minimalistic server implementation, mainly for the purpose of
+providing remote storage and a syncing node for local-first applications,
+federated servers, and standard farmOS instances that have the [`farm_runrig`
+module] installed, all with very little overhead. For more comprehensive server
+functionality, the server can be extended or wrapped by downstream applications,
+or integrated into a microservice architecture.
 
 #### Requirements
-- Wraps the [Common Engine], integrating components for:
-  - Syncing
-  - farmOS Data Model
-  - Protocol Support
-- farmOS JSON:API endpoints
-- Connection to [Plugin Store]
+- Integrates the [Common Engine]
+- Extensible via shared [middlewares & adapters], for a diversity of
+  - Serialization formats
+  - Network protocols
+  - Framework middlewares
+  - Database connections
+  - Connection to the [Plugin Store]
+
+[`farm_runrig` module]: #farmos-module-farm_runrig
+[middlewares & adapters]: #middlewares--adapters
 
 ### Client
 This will be a fairly lightweight client application, practically just a daemon
