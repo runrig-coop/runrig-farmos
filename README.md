@@ -91,9 +91,53 @@ language, ideally Rust, for greater portability and improved performance.
 
 ### Common Engine
 The Common Engine will form the primary means of implementing the farmOS Data
-Model and other [core requirements] stated above. The Core
+Model and other [core requirements] stated above.
+
+The Core Logic in particular will require special care to implement without
+violating the principle of [schema-first design]. A degree of schema enforcement
+can be achieved with remote procedure calls (RPC), but that won't necessarily
+enforce the particulars of a given algorithm; mainly RPC would just guarantee a
+consistent type signature for each procedure – e.g., `getGeometry :: Asset ->
+Geometry`. Some amount of code-sharing will likely prove unavoidable in the
+first implementations of Runrig farmOS. Thankfully, the occasions of specific
+logic in the farmOS Data Model are fairly limited (only the three listed in the
+requirements below at the time of this draft), and changes are unlikely to be
+introduced to Standard between major version releases. The portability of the
+core packages will likely suffice to propagate consistent implementation of
+these algorithms. As necessity dictates, greater consistency might be achieved
+with the adoption of more rigorous type systems, such as [Algebraic Data Types]
+(ADTs). Even more comprehensive, in-band specification and enforcement
+mechanisms might be possible via more innovative solutions, such as [Algebraic
+Property Graphs] (essentially a marriage of IDL/RPC and RDF but reinforced by
+using ADTs as its core primitives) or the distributed protocols in development
+by the [Spritely Institute], like [OCapN], which expands upon Mark S. Miller's
+[CapTP] with a particular eye towards improving federated protocols like
+ActivityPub. As much as possible, OCapN aims to be backwards compatible with
+certain existing implementations of CapTP, like Cap'n Proto, which could make
+[Cap'n Proto's RPC protocol] and its [schema language] an especially attractive
+target for early implementations.
+
+Regarding the syncing protocol, this will essentially represent a shared,
+deterministic consensus algorithm to handle concurrency across multiple systems.
+That introduces another element of logic that must be shared, but fortunately
+there exist a number of ready-made solutions for this, particularly
+Conflict-free Replicated Data Types (CRDTs), as well as established libraries
+like [Automerge] for implementing those data types consistently across disparate
+environments. An advantage of CRDTs (and other solutions similarly based upon
+data structures and mathematically rigorous transformations; ADTs excel here
+too) is that they also remain network-agnostic, so that behavior should remain
+predictable no matter the form of communication between nodes.
 
 [core requirements]: #core-requirements
+[schema-first design]: #schema-first-design
+[Algebraic Data Types]: https://jrsinclair.com/articles/2019/algebraic-data-types-what-i-wish-someone-had-explained-about-functional-programming/
+[Algebraic Property Graphs]: https://arxiv.org/abs/1909.04881
+[Spritely Institute]: https://files.spritely.institute/papers/spritely-core.html
+[OCapN]: https://ocapn.org/
+[Cap'n Proto's RPC protocol]: https://capnproto.org/rpc.html
+[schema language]: https://capnproto.org/language.html
+[Conflict-free Replicated Data Types (CRDTs)]: https://www.youtube.com/watch?v=B5NULPSiOGw
+[Automerge]: https://automerge.org/
 
 #### Requirements
 - Implementation of the farmOS Data Model
@@ -102,8 +146,7 @@ Model and other [core requirements] stated above. The Core
     - [Location Geometry]
     - [Group Membership]
     - [Inventory Adjustment]
-- Syncing Engine (deterministic consensus algorithm)
-  - Agnostic of the network & storage layers (ideally)
+- Syncing Protocol
 
 [Location Geometry]: https://farmos.org/model/logic/location
 [Group Membership]: https://farmos.org/model/logic/group
