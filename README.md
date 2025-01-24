@@ -95,18 +95,25 @@ Model and other [core requirements] stated above.
 
 The Core Logic in particular will require special care to implement without
 violating the principle of [schema-first design]. A degree of schema enforcement
-can be achieved with remote procedure calls (RPC), but that won't necessarily
+might be achieved with remote procedure calls (RPC), but that won't necessarily
 enforce the particulars of a given algorithm; mainly RPC would just guarantee a
 consistent type signature for each procedure – e.g., `getGeometry :: Asset ->
 Geometry`. Some amount of code-sharing will likely prove unavoidable in the
 first implementations of Runrig farmOS. Thankfully, the occasions of specific
-logic in the farmOS Data Model are fairly limited (only the three listed in the
-requirements below at the time of this draft), and changes are unlikely to be
-introduced to Standard between major version releases. The portability of the
-core packages will likely suffice to propagate consistent implementation of
-these algorithms. As necessity dictates, greater consistency might be achieved
-with the adoption of more rigorous type systems, such as [Algebraic Data Types]
-(ADTs). Even more comprehensive, in-band specification and enforcement
+logic in the farmOS Data Model are fairly limited, at the time of this draft,
+currently just the three procedures listed in the requirements below. Changes
+are unlikely to be introduced to Standard between major version releases. Also,
+the three current logic procedures are standard to all relevant entities,
+regardless of the bundle, so there appears to be no risk that farmOS modules
+could add new bundles that would possibly alter that logic. For now then, the
+logic will be implemented mostly in code, but the portability of the core
+packages should suffice to ensure consistent behavior across systems.
+
+As necessity dictates, greater algorithmic consistency might be achieved with
+the adoption of more rigorous type systems, such as [Algebraic Data Types]
+(ADTs). Though they don't add much in the way of schema enforcement, semantic
+ontologies like RDF may offer greater transparency of system configurations and
+capabilities. Even more comprehensive, in-band specification and enforcement
 mechanisms might be possible via more innovative solutions, such as [Algebraic
 Property Graphs] (essentially a marriage of IDL/RPC and RDF but reinforced by
 using ADTs as its core primitives) or the distributed protocols in development
