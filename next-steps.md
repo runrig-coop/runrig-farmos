@@ -60,7 +60,7 @@ need to be schematized or serialized? Is it a requirement for this first
 implementation? What schema language(s) should be used in this first
 implementation? Cap'n Proto? JSON Schema?
 
-- Refine the farmOS Data Model
+- [Rederive & Formalize the farmOS Data Model]
   - Logic as transforms, capabilities, or RPC methods
   - Computed values separate from attributes
   - Target values separate from attributes
@@ -87,3 +87,4 @@ vocabularies and/or an original farmOS ontology akin to the DFC?
 [Location Geometry]: https://farmos.org/model/logic/location
 [Group Membership]: https://farmos.org/model/logic/group
 [Inventory Adjustment]: https://farmos.org/model/logic/inventory
+[Rederive & Formalize the farmOS Data Model]: ./farmos-data-model-rederived.md
