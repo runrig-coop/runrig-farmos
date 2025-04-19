@@ -28,7 +28,7 @@ resources.
 In pursuit of these aims, all packages in the Runrig farmOS suite must support
 (or at least not prohibit) the following core requirements, wherever applicable:
 
-1. __A library implementation of the farmOS Data Model__, written
+1. __`libfarmOS`, a library implementation of the farmOS Data Model__, written
   in Rust or C/C++ and compiled to binary for optimal portability &
   performance; it should be capable of serving as a sort of driver underlying
   servers, mobile devices, IoT sensors, even embedded systems, without
@@ -97,9 +97,36 @@ TypeScript, as an early expedient that at least meets the criteria for
 portability; eventually, however, most of packages would be ported to a compiled
 language, ideally Rust, for greater portability and improved performance.
 
-### Common Engine
-The Common Engine will form the primary means of implementing the farmOS Data
-Model and other [core requirements] stated above.
+### Common Engine, or `libfarmos`
+The Common Engine will be the primary locus of development of Runrig farmOS's
+[Core Requirements], particularly implementation of the farmOS Data Model (Reqs.
+1 & 2) and the consensus algorithm (Req. 3). Interoperation with Standard farmOS
+(Req. 4), as well as other implementations, will mostly be the task of
+[middlewares & adapters], though of course those utilities will rely heavily on
+the Common Engine.
+
+As a sort of standard library, it might make sense to adopt the naming
+convention common to low-level system libraries, especially those written in
+C/C++ and Rust, and package this engine under the name `libfarmOS` or something
+similar; this is akin to a range of widely used system libraries like
+[`libcurl`], [`libsodium`], [`libpng`], [`libsignal`], [`libVLC`], and
+[`libsql`]. These examples variously serve a number of roles and functions:
+dependencies for other system libraries and programs; drivers for higher-level
+languages through foreign function interface (FFI), WebAssembly (WASM), or
+running as an independent daemon; plug-n-play implementations of standards and
+protocols that can be easily embedded into end-user applications to extend their
+compatibility; or even, in the case of `libVLC`, a little bit of everything
+above _plus_ a headless CLI utility for processing large binary datasets. A
+library like `libfarmOS` could go a tremendous ways to encouraging adoption of
+the farmOS Data Model into existing projects, even if just as an afterthought.
+Support for other platforms and runtimes could be provided more readily as
+language bindings, similar to the roles currently fulfilled by the [farmOS.py]
+and [farmOS.js] client libraries, but with far greater capabilities and far less
+effort to maintain. In essence, they would function as fully fledged
+implementations of the data model, which could then be coupled with the
+[middlewares & adapters] or third-party networking utilities and storage drivers
+to perform the full range of backend capabilities, as performed by Standard
+farmOS servers today.
 
 The Core Logic in particular will require special care to implement without
 violating the principle of [schema-first design]. A degree of schema enforcement
@@ -130,9 +157,16 @@ by the [Spritely Institute], like [OCapN], which expands upon Mark S. Miller's
 ActivityPub. As much as possible, OCapN aims to be backwards compatible with
 certain existing implementations of CapTP, like Cap'n Proto, which could make
 [Cap'n Proto's RPC protocol] and its [schema language] an especially attractive
-target for early implementations.
+target for early implementations. Of course, we should remain careful not to
+impose specific transport protocols or communication models on the Common Engine
+itself – the actual implementation of Cap'n Proto or any RPC framework should be
+the purview of [middlewares & adapters] below. The Common Engine, meanwhile,
+should maintain its own internal representation of farmOS data structures and
+procedures that can interface with those protocols and frameworks. Ultimately,
+the Common Engine must be capable of ingesting schemas and logic extensions that
+can be interpreted consistently, regardless of their external representation.
 
-Regarding the syncing protocol, this will essentially represent a shared,
+Regarding the syncing protocol, this will strictly perform the role of a shared,
 deterministic consensus algorithm to handle concurrency across multiple systems.
 That introduces another element of logic that must be shared, but fortunately
 there exist a number of ready-made solutions for this, particularly
@@ -141,9 +175,23 @@ like [Automerge] for implementing those data types consistently across disparate
 environments. An advantage of CRDTs (and other solutions similarly based upon
 data structures and mathematically rigorous transformations; ADTs excel here
 too) is that they also remain network-agnostic, so that behavior should remain
-predictable no matter the form of communication between nodes.
+predictable no matter the form of communication between nodes. The Automerge
+library is actually quite exemplary in this regard, insofar as it restricts
+itself to the processing, merging, and transformations of the data structures
+alone, in accordance to clearly specified behaviors and mathematical laws (e.g.,
+commutativity, associativity, etc). It nevertheless remains thoroughly unaware
+of the network, a key element of [Automerge's design principles], which are a
+primary source of inspiration for much of this proposal. 
 
 [core requirements]: #core-requirements
+[`libcurl`]: https://curl.se/libcurl/
+[`libsodium`]: https://libsodium.org
+[`libpng`]: http://www.libpng.org/pub/png/libpng.html
+[`libsignal`]: https://github.com/signalapp/libsignal
+[`libVLC`]: https://wiki.videolan.org/LibVLC
+[`libsql`]: https://turso.tech/libsql
+[farmOS.js]: https://github.com/farmOS/farmOS.js
+[farmOS.py]: https://github.com/farmOS/farmOS.py
 [schema-first design]: #schema-first-design
 [Algebraic Data Types]: https://jrsinclair.com/articles/2019/algebraic-data-types-what-i-wish-someone-had-explained-about-functional-programming/
 [Algebraic Property Graphs]: https://arxiv.org/abs/1909.04881
@@ -153,6 +201,7 @@ predictable no matter the form of communication between nodes.
 [schema language]: https://capnproto.org/language.html
 [Conflict-free Replicated Data Types (CRDTs)]: https://www.youtube.com/watch?v=B5NULPSiOGw
 [Automerge]: https://automerge.org/
+[Automerge's design principles]: https://automerge.org/docs/hello/#design-principles
 
 #### Requirements
 - Implementation of the farmOS Data Model
@@ -313,7 +362,7 @@ module for Standard farmOS and capable of running in the browser as a [PWA].
 [PWA]: https://web.dev/learn/pwa/progressive-web-apps
 
 
-[Common Engine]: #common-engine
+[Common Engine]: #common-engine-or-libfarmos
 [Runrig Server]: #server
 [Runrig Client]: #client
 [Plugin Store]: #plugin-store
