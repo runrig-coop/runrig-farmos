@@ -26,24 +26,32 @@ resources.
 
 ### Core Requirements
 In pursuit of these aims, all packages in the Runrig farmOS suite must support
-(or at least not prohibit) these three core requirements, wherever applicable:
+(or at least not prohibit) the following core requirements, wherever applicable:
 
-1. __Interoperation with Standard farmOS (v 3.0 or higher)__, if not in the form
-  of realtime networked communication then at least by maintaining compatibility
-  with data migrated to or from Standard servers.
-2. __Multi-farm data representations and behavior__, either as a [farmOS
-  Organization] entity or as a compatible superset thereof.
+1. __A library implementation of the farmOS Data Model__, written
+  in Rust or C/C++ and compiled to binary for optimal portability &
+  performance; it should be capable of serving as a sort of driver underlying
+  servers, mobile devices, IoT sensors, even embedded systems, without
+  reference to higher level abstractions, such as the network, storage, or
+  presentation layers.
+2. __Multi-farm data representations and behavior__, either as the proposed
+  [farmOS Organization entity] or other compatible extension of the farmOS Data
+  Model, in order to support multi-tenancy and easier aggregation.
 3. __A shared, deterministic consensus algorithm__, providing eventual
   consistency and predictable conflict resolution across concurrent devices and
-  storage instances.
+  storage instances, but again, without reference to any specific network or
+  storage protocols.
+4. __Interoperation with Standard farmOS (v 3.0 or higher)__, if not in the form
+  of realtime networked communication then at least by maintaining compatibility
+  with data migrated to or from Standard servers.
 
 The hope is that federated, P2P, and local-first architectures will emerge as
-convenient byproducts of these three requirements alone, so support for
+convenient byproducts of these four requirements alone, so support for
 distributed architectures is not listed here specifically; however, that is
 still considered an essential feature in its own right, so the core requirements
 may be appended or amended if it does not emerge automatically as expected.
 
-[farmOS Organization]: https://github.com/farmOS/farmOS/pull/849
+[farmOS Organization entity]: https://github.com/farmOS/farmOS/pull/849
 
 ### Schema-first Design
 Another critical aspect of these packages is that they should adhere to a
