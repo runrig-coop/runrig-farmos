@@ -1,10 +1,10 @@
 # Next Steps for a Runrig farmOS MVP
 Address the high-level questions for each of these areas of concern and scope out the required features for an MVP:
 
-- [ ] High-level Scoping
+- [x] High-level Scoping
   - [x] [Common Engine Components](#common-engine--core-libraries)
   - [x] [Middleware, Server & Client Demo](#middleware-server--client-demo)
-  - [ ] [Schema-first Implementation](#schema-first-implementation)
+  - [x] [Schema-first Implementation](#schema-first-implementation)
 - [ ] Low-level Scoping
 
 ## Common Engine & Core Libraries
@@ -60,31 +60,51 @@ need to be schematized or serialized? Is it a requirement for this first
 implementation? What schema language(s) should be used in this first
 implementation? Cap'n Proto? JSON Schema?
 
-- [Rederive & Formalize the farmOS Data Model]
+- [Rederive the farmOS Data Model] from first principles
   - Logic as transforms, capabilities, or RPC methods
   - Computed values separate from attributes
   - Target values separate from attributes
   - SOPs as _a vocabulary of predefined transform parameters_
 - Review Prior Art
-  - Sandstorm (and other plugin stores/exchanges/commons)
+  - Plugin stores/exchanges/commons, particularly [Sandstorm]
   - NALT & Nemo Inference Engine
-  - DFC, Discover Regenerative, & OFN
+  - [DFC Standard], Discover Regenerative, & OFN
   - Our Sci Conventions & farmOS Mirror
   - Conexus, APGs, & Hydra
 - Assess Schema, RPC, and Ontology Candidates
-  - Capn'n Proto
-  - JSON-LD
-  - Atomic
-  - ShEx
-  - ADTs (eg, Fantasy Land)
-  - CUE
+  - [Cap'n Proto], [OCapN], or another [CapTP] implementation
+  - [ATProto Lexicon]
+  - [Atomic Data]
+  - [JSON-LD]
+  - [ShEx]
+  - ADTs (a la [Fantasy Land])
+  - [CUE]
+  - [IPLD]
+  - [RAMP Shapes] (RDF ADT Mapping)
+    - tagline: "declarative RDF ↔ algebraic data type mapping"
 
-__MAIN TAKEAWAY:__ If farmOS records and logic can be represented as Cap'n Proto
-Schema/RPCs (ie, `.capnp` files) or equivalent, can the various types, structs,
-interfaces, methods, and fields in Cap'n Proto be mapped to existing RDF
-vocabularies and/or an original farmOS ontology akin to the DFC?
+### FINAL TAKEAWAY
+__If farmOS records and logic can be represented in Cap'n Proto Schema, JSON__
+__Schema, CUE, or their equivalent, can the various schema types, their__
+__constituent interfaces, methods, and fields then be mapped to existing RDF__
+__vocabularies or an original farmOS ontology, akin to or even as an extension__
+__of the DFC Standard, with additional mappings to the ADTs in the RAMP Shapes__
+__specification?__
 
 [Location Geometry]: https://farmos.org/model/logic/location
 [Group Membership]: https://farmos.org/model/logic/group
 [Inventory Adjustment]: https://farmos.org/model/logic/inventory
-[Rederive & Formalize the farmOS Data Model]: ./farmos-data-model-rederived.md
+[Rederive the farmOS Data Model]: ./farmos-data-model-rederived.md
+[Sandstorm]: https://sandstorm.org/how-it-works
+[DFC Standard]: https://dfc-standard.org/
+[Cap'n Proto]: https://capnproto.org/rpc.html
+[OCapN]: https://ocapn.org/
+[CapTP]: http://erights.org/elib/distrib/captp/index.html
+[ATProto Lexicon]: https://atproto.com/guides/lexicon
+[Atomic Data]: https://docs.atomicdata.dev/core/json-ad
+[JSON-LD]: https://json-ld.org/
+[ShEx]: https://shex.io/
+[Fantasy Land]: https://github.com/fantasyland/fantasy-land
+[CUE]: https://cuelang.org/docs/tour/basics/json-superset/
+[IPLD]: https://ipld.io/
+[RAMP Shapes]: https://ramp-shapes.github.io/
