@@ -1,19 +1,11 @@
 # Next Steps for a Runrig farmOS MVP
 Address the high-level questions for each of these areas of concern and scope out the required features for an MVP:
 
-- [ ] [Common Engine Components](#common-engine-components)
-  - farmOS Records
-  - farmOS Logic
-  - Syncing or Reconciliation
-- [ ] [Middlewares & Client-Server Demo](#middlewares--client-server-demo)
-  - Middleware
-  - Packaging Utilities
-  - Server
-  - Client
-- [ ] [Schema-first Implementation](#schema-first-implementation)
-  - Refine the farmOS Data Model
-  - Review prior art
-  - Assess schema, RPC, and ontology candidates
+- [ ] High-level Scoping
+  - [ ] [Common Engine Components](#common-engine-components)
+  - [ ] [Middlewares & Client-Server Demo](#middlewares--client-server-demo)
+  - [ ] [Schema-first Implementation](#schema-first-implementation)
+- [ ] Low-level Scoping
 
 ## Common Engine Components
 What specific packages and components of the Common Engine would have provided a
