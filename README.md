@@ -313,9 +313,33 @@ beyond the [Common Engine] and Standard farmOS's core modules, respectively.
 [app shell]: https://developer.chrome.com/blog/app-shell/
 [`useEntities`]: https://github.com/farmOS/field-kit/blob/e72ce401ae6aa987d7c28f67dce3a64ee9020931/packages/field-kit/src/entities/index.js#L144-L497
 
-### Plugin Store
-For examples, see the [Nextcloud App Store](https://apps.nextcloud.com/) or
-[Sandstorm](https://apps.sandstorm.io/).
+### Plugin Store & Schema Clearinghouse
+Plugins can wrap various [middlewares & adapters], along with associated
+schemas, vocabularies, UI widgets, and other dependencies, to extend the
+functionality of servers and clients. By making these different components
+available from a known secure provider, federated services and devices can
+maintain compatibility with trusted peers within the network more easily and
+without sacrificing extensibility. The store can also make useful extensions
+more discoverable to end users and admins, with appropriate permissioning where
+necessary or desirable, through a GUI web application and CLI package manager.
+
+For relevant open source examples, see:
+
+- [Nextcloud App Store]
+  - [source](https://github.com/nextcloud/appstore)
+- [Kimai Plugin Store]
+  - [source](https://github.com/kimai/www.kimai.org/tree/main/_data/store)
+- [Sandstorm App Market]
+  - [How Sandstorm Works]
+  - [docs](https://docs.sandstorm.io/en/latest/developing/)
+- [YunoHost Application Catalog]
+  - [docs](https://doc.yunohost.org/en/apps_overview)
+
+[Nextcloud App Store]: https://apps.nextcloud.com/
+[Kimai Plugin Store]: https://www.kimai.org/store/
+[Sandstorm App Market]: https://apps.sandstorm.io/
+[How Sandstorm Works]: https://sandstorm.org/how-it-works
+[YunoHost Application Catalog]: https://apps.yunohost.org/catalog
 
 #### Requirements
 - Secure signing of authorized plugins
@@ -365,4 +389,4 @@ module for Standard farmOS and capable of running in the browser as a [PWA].
 [Common Engine]: #common-engine-or-libfarmos
 [Runrig Server]: #server
 [Runrig Client]: #client
-[Plugin Store]: #plugin-store
+[Plugin Store]: #plugin-store--schema-clearinghouse
