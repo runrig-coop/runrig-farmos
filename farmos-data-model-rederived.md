@@ -1,4 +1,39 @@
-# Rederive & Formalize the farmOS Data Model
+# Rederive the farmOS Data Model
+These notes are very, _very_ rough, and probably exceed my own knowledge of
+category theory and proper database design, so please, don't judge or mistake my
+explorations for expertise. It's just how I currently think that the ideal of a
+[schema-first design] can best be realized.
+
+The whole concept of rederiving the farmOS Data Model from first principles
+stems from the pain points I experienced with [farmOS Field Kit], trying to
+anticipate the different kinds of schema variations that might occur on
+different server configurations. Even when JSON Schema was finally provided by
+the server, it often contained inconsistencies and erroneous definitions, as
+well as many extraneous fields that were only pertinent to Drupal's own
+internals and modules. The biggest issues were ameliorated with a few bugfixes
+and some considerable workarounds in farmOS.js – for instance, the [`adapter`]
+module that tried to isolate these "Drupalisms" as much as possible so they did
+not bleed into the JavaScript implementation for the model or client. Still, it
+struck me it would remain prone to continuous issues of that sort so long as the
+JSON Schema and was derived from the Drupal implementation, rather than the
+other way around: a pure schema representation that could form the basis of the
+Drupal service and also be serialized in its original form for ingestion by
+external clients and peers.
+
+It's clear to me, however, that this may likely require a more fine-grained set
+of data primitives than Drupal's Entity-Relationship Model that comprises the
+main backbone of the farmOS Data Model as it stands today. However, I believe
+compatibility with Standard farmOS can still be preserved if approached with a
+mind to compose those entities from smaller parts. The Entity-Relationship Model
+is a sound base to start from, and it's further improved by the many borrowings
+from "double-entry ledger" that I know underpins the design of farmOS logs.
+Functional programming is well regarded for its emphasis on composition, perhaps
+above all other features, so it seems the natural direction to take when aiming
+to rederive farmOS entities by pure composition.
+
+[schema-first design]: ./README.md#schema-first-design
+[farmOS Field Kit]: https://github.com/farmOS/field-kit
+[`adapter`]: https://github.com/farmOS/farmOS.js/blob/2.0.0-beta.16/src/client/adapter/index.js
 
 ## Entities as Functions
 What if logs and assets are modelled as _pure functions_ or [morphisms] or
