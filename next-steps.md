@@ -2,15 +2,15 @@
 Address the high-level questions for each of these areas of concern and scope out the required features for an MVP:
 
 - [ ] High-level Scoping
-  - [ ] [Common Engine Components](#common-engine-components)
+  - [x] [Common Engine Components](#common-engine--core-libraries)
   - [ ] [Middlewares & Client-Server Demo](#middlewares--client-server-demo)
   - [ ] [Schema-first Implementation](#schema-first-implementation)
 - [ ] Low-level Scoping
 
-## Common Engine Components
+## Common Engine & Core Libraries
 What specific packages and components of the Common Engine would have provided a
-viable Runrig farmOS server that I could have deployed for Farm Flow if they had
-been available at the start of 2024? Can farmOS.js form the basis for this?
+viable Runrig farmOS server that I could have deployed behind Farm Flow if they
+had been available at the start of 2024? Can farmOS.js form the basis for this?
 
 - farmOS Records
   - Entities, including new additions:
@@ -19,6 +19,8 @@ been available at the start of 2024? Can farmOS.js form the basis for this?
   - Bundles
   - Attributes
   - Relationships
+- Internal Schema Representation
+  - ie, agnostic of formats like Cap'n Proto or JSON Schema
 - farmOS Logic
   - [Location Geometry]
   - [Group Membership]
