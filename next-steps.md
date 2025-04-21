@@ -3,7 +3,7 @@ Address the high-level questions for each of these areas of concern and scope ou
 
 - [ ] High-level Scoping
   - [x] [Common Engine Components](#common-engine--core-libraries)
-  - [ ] [Middlewares & Client-Server Demo](#middlewares--client-server-demo)
+  - [x] [Middleware, Server & Client Demo](#middleware-server--client-demo)
   - [ ] [Schema-first Implementation](#schema-first-implementation)
 - [ ] Low-level Scoping
 
@@ -28,7 +28,7 @@ had been available at the start of 2024? Can farmOS.js form the basis for this?
 - Syncing or Reconciliation Protocol
   - ie, merging w/o network
 
-## Middlewares & Client-Server Demo
+## Middleware, Server & Client Demo
 Which server frameworks, protocols, and databases will require middlewares to
 support this first implementation? Is a client implementation necessary for
 demonstration purposes at this point? Or a CI/CD utility to replicate and deploy
@@ -45,8 +45,9 @@ the server via something like CoopCloud or CloudRon?
   - Docker
   - npm
   - CoopCloud recipe
-- Server (ideally just a bundle of the above middlewares)
-- Client (demo)
+- Server
+  - ie, ideally just a bundle of middlewares deployed as a Docker image 
+- Client Demo
   - Field Kit
   - Farm Flow
   - Projection Engine
