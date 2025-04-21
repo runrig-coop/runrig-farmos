@@ -345,25 +345,9 @@ For relevant open source examples, see:
 - Secure signing of authorized plugins
 - [Runrig Server] plugins
 - [Runrig Client] plugins
-- [Common Engine] plugins, extending core schemas & protocols
 - Schema & protocol publication
 - Versioning & dependency management
 - Package manager CLI (probably separate pkg)
-
-The common plugins will mostly serve as dependencies for the client & server
-plugins, so users won't install them independently and they can remain hidden
-except to developers and sysadmins. As separate plugins, however, multiple
-client/server plugins can all depend on one shared common plugin without any
-redundancy. They can also depend on different versions of the same common plugin
-without corrupting data or landing in dependency hell. To ensure this, the
-client/server plugins themselves should be prohibited from making schema
-changes, adding protocols, or otherwise altering characteristics of the [Common
-Engine]. So if a developer is writing a client or server plugin and needs to
-extend a schema, they will have to use a common plugin to do that and declare
-the common plugin as a dependency, whether that it already exists or they have
-to write their own. Accordingly, all plugins will need to declare what type they
-are, `"client"`, `"server"`, or `"common"`, in some sort of package manifest or
-config file.
 
 ## farmOS Modules
 Drupal modules for installation on Standard farmOS.
