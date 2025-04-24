@@ -164,8 +164,10 @@ any clearly defined frame of reference for that historical duration of time.
 
 By adopting [Rich Hickey's process-oriented, functional programming approach],
 we can sidestep the whole time problem while holding onto our version history at
-no extra cost. This is because because the _asset entity as a function_ is now
-just an identifier for a causally ordered time series of value states.
+no extra cost. This is because the _asset entity as a function_ is now just an
+_identifier_, signifying a causally ordered time series of value-states – that
+is, the series of _logs with an established relationship to the identifier_, the
+UUID we just so happen to call "the asset."
 
 <picture>
   <figure>
