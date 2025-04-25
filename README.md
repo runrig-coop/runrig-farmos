@@ -6,13 +6,36 @@ Runrig's design principles._
 ## Overview
 _Runrig farmOS_ is a proposed suite of software packages for replicating and
 interoperating with the original client-server implementation of farmOS, which
-is written as a Drupal distribution in PHP. (To avoid confusion, we'll refer
-here to the former as _Runrig farmOS_ or simply _Runrig_ and to the latter as
+is written as a Drupal distribution in PHP. (To avoid confusion, I'll refer here
+to the former as _Runrig farmOS_ or simply _Runrig_ and to the latter as
 _Standard farmOS_ or _Standard_.) Runrig farmOS packages are intended to run on
 servers, mobile devices, desktops, sensors, and embedded systems. They may be
 deployed as a substitute for a Standard farmOS instance, as a supplement to an
-existing one, or merely as one among many services bundled together as a Runrig
-Autonomous Municipal Platform, or RAMP (more on this in a separate document).
+existing one, or merely as one among many services bundled together as a
+municipal platform.[^muni]
+
+[^muni]: A full exposition on municipal platforms, which might also be called
+_Federated Autonomous Municipal Platforms_, or FAMPs, will have to wait for now
+because they go far beyond the scope of Runrig farmOS alone. For the time being,
+however, municipal platforms can be understood as roughly equivalent to the
+concept I started out to describing as "service platforms" in [The Runrig Plan]
+from 2023. They are collectively owned and controlled digital platforms, similar
+to [platform cooperatives], but each comprising multiple services or
+applications, in turn representing multiple businesses and consumer groups,
+rather than a monolithic single-service platform for a cooperative. A close
+approximation of this kind of multi-service, democratically governed and
+user-owned platform would be [May First Movement Tech Co-op], though it is far
+more general in purpose and geographically dispersed, whereas the municipal
+platforms I intend to build with Runrig would focus more on the productive
+forces of a single foodshed or bioregion, with an emphasis on land management
+and food systems. As a final point of reference, they would also embody much of
+the traits of the "civic platforms" laid out in James Muldoon's _Platform
+Socialism_ (Pluto Press, 2022).
+
+[The Runrig Plan]:
+    https://www.runrig.org/overview#service-platforms
+[platform cooperatives]: https://platform.coop/
+[May First Movement Tech Co-op]: https://mayfirst.coop/en/member-benefits/
 
 Runrig farmOS is intended to enable local-first, peer-to-peer, and federated
 architectures. The aim is to bring these and other features to Standard farmOS,
@@ -97,7 +120,7 @@ TypeScript, as an early expedient that at least meets the criteria for
 portability; eventually, however, most of packages would be ported to a compiled
 language, ideally Rust, for greater portability and improved performance.
 
-### Common Engine, or `libfarmos`
+### Common Engine or `libfarmos`
 The Common Engine will be the primary locus of development of Runrig farmOS's
 [Core Requirements], particularly implementation of the farmOS Data Model (Reqs.
 1 & 2) and the consensus algorithm (Req. 3). Interoperation with Standard farmOS
