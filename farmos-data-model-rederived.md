@@ -212,3 +212,67 @@ values, however, this would necessitate persisting a distinct record in the
 database for each target value.
 
 [Computed Values]: #computed-values
+
+
+<!-- TODO: Don't include this if it's incorporated into data indep article. -->
+## ER Model vs Merkle Trees and DHTs
+What if instead of the Entity Relationship (ER) Model we used something like a
+Name-Value Model or Identifier-Value Model, akin to what Rich Hickey describes
+in his talk, ["Are We There Yet?"] and the [Hash Array Mapped Trie] (HAMT) that
+he used in the [Clojure implementation] of [persistent data structures]? HAMT
+was first described by Phil Bagwell in his highly regard 2000 paper, ["Ideal
+Hash Trees"], which I still need to read.
+
+According to Wikipedia, there's also this thing called a [Concurrent Hash Trie]
+(or Ctrie, not to be confused w/ C-trie), which boasts:
+
+> Ctries support a lock-free, linearizable, constant-time snapshot operation,
+> based on the insight obtained from persistent data structures. This is a
+> breakthrough in concurrent data-structure design, since existing concurrent
+> data-structures do not support snapshots.
+
+The "snapshot" aspect is appealing, given how much emphasis Hickey gives to the
+metaphor in describing Whitehead's Process Philosophy. But is immutability what
+a distributed system based on data independence[^indep] would actually need or
+want? All of these other implementations are meant for in-memory data structures
+or for optimizing many write operations, things like language interpreters and
+[Software Transactional Memory] (another concept Hickey mentions in his talk);
+that's really not much like the problem I'm hoping to solve. So is there a way
+to simplify that functionality w/o breaking it? What I should be aiming for is a
+model tailored to low-power, distributed environment that can run across a small
+regional network, preferably even more localized by mesh networks and P2P
+connections, not a data center running trillions of operations per second on
+petabytes of data.
+
+[^indep]: This was originally taken from a yet unpublished article on [data
+    independence].
+
+A trie (or tree) of some sort seems to me more and more like the kind of
+structure that is wanted here, and there's certainly precedent for structures
+like [Merkle Trees] in distributed systems. In fact, given the ubiquity of
+Merkle tree implementations – they find their way into a vast array of popular
+applications including Git, BitTorrent, Nix, IPFS, Hypercore, etc. – it seems
+like the best first approach to get up and running quickly, if a tree of some
+sort is indeedsuitable, given the availability of mature libraries in multiple
+languages, the accessibility of literature and learning resources. Another
+closely related structure, though not exactly a tree, are [Distributed Hash
+Tables (DHTs)], which flatten the Merkle tree to a lookup table of common
+resources that could be dumped into SQL and replicated more readily.
+
+
+["Are We There Yet?"]:
+    https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/AreWeThereYet.md
+[Hash Array Mapped Trie]: https://en.wikipedia.org/wiki/Hash_array_mapped_trie
+[Clojure implementation]:
+    https://github.com/clojure/clojure/blob/clojure-1.12.0/src/jvm/clojure/lang/PersistentHashMap.java
+["Ideal Hash Trees"]: https://lampwww.epfl.ch/papers/idealhashtrees.pdf
+[persistent data structures]:
+    https://en.wikipedia.org/wiki/Persistent_data_structure
+[data independence]:
+    https://runrig-org-git-draft-data-indep-runrig.vercel.app/posts/data-independence
+[Software Transactional Memory]:
+    https://en.wikipedia.org/wiki/Software_transactional_memory
+[Merkle Trees]: https://en.wikipedia.org/wiki/Merkle_tree
+[Distributed Hash Tables (DHTs)]:
+    https://en.wikipedia.org/wiki/Distributed_hash_table
+[Concurrent Hash Trie]: https://en.wikipedia.org/wiki/Merkle_tree
