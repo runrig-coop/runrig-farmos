@@ -232,6 +232,7 @@ According to Wikipedia, there's also this thing called a [Concurrent Hash Trie]
 
 The "snapshot" aspect is appealing, given how much emphasis Hickey gives to the
 metaphor in describing Whitehead's Process Philosophy. But is immutability what
+<!-- FIXME: This was a reference to my data independence entry. -->
 a distributed system like the ones I'm describing above would actually need or
 want? All of these other implementations are meant for in-memory data structures
 or for optimizing many write operations, things like language interpreters and
